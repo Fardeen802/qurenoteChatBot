@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
+import { v4 as uuid } from 'uuid';
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! I'm your assistant. How can I help you today?", sender: 'bot', timestamp: new Date() }
@@ -7,6 +7,7 @@ const Chatbot = () => {
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
+  const [sessionId] = useState(() => uuid());
 
   const getBackendResponse = async (userMessage) => {
     await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
@@ -24,14 +25,14 @@ const Chatbot = () => {
       "Let me give you a detailed response to that question."
     ];
 
-    let response = await fetch("http://localhost:5000/api/hello",{
+    let response = await fetch("http://localhost:3000/api/chat",{
         method:"POST",
         body:JSON.stringify({
-            sessionId:Date.now(),
-            userMessage:userMessage
+            sessionId,
+            message:userMessage
         }),
         headers:{
-            'Content-type':"appplication/json"
+            'Content-type':"application/json"
         }
     })
 
