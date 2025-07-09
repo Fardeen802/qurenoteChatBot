@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Chatbot from './Chatbot';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -10,12 +11,15 @@ function App() {
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch((err) => setMessage('Error connecting to backend.'));
+
+
+
+      
   }, []);
 
   return (
     <div className="App">
-      <h1>Qurenote ChatBot</h1>
-      <p>{message}</p>
+      <Chatbot/>
     </div>
   );
 }
