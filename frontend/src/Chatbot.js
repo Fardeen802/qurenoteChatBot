@@ -25,7 +25,7 @@ const Chatbot = () => {
       "Let me give you a detailed response to that question."
     ];
 
-    let response = await fetch("http://localhost:3000/api/chat",{
+    let response = await fetch("http://localhost:5000/api/chat",{
         method:"POST",
         body:JSON.stringify({
             sessionId,
