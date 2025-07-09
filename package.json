@@ -1,0 +1,21 @@
+{
+  "name": "qurenotechatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fardeen802/qurenoteChatBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fardeen802/qurenoteChatBot/issues"
+  },
+  "homepage": "https://github.com/Fardeen802/qurenoteChatBot#readme"
+}
