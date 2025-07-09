@@ -1,5 +1,6 @@
 const { appendMessages } = require("../utils/InMemoryStore");
 const OpenAiUtils = require("../utils/OpenAiUtils");
+const { connectToMongo } = require("../mongo");
 
 class ChatService {
   async requestOpenAI(inputMessages, sessionId) {
@@ -22,7 +23,30 @@ class ChatService {
           if(!phone && !email){
             functionResult.message="please provide either phone no or email.";
           }else{
-            functionResult.message = "your appointment is booked with reference number 23412";
+            // All parameters received, save to MongoDB
+            try {
+              const { collection } = await connectToMongo();
+              const appointmentData = {
+                patientName,
+                dob,
+                phone,
+                email,
+                providerName,
+                reasonForVisit,
+                time,
+                createdAt: new Date(),
+                status: 'booked'
+              };
+              
+              const result = await collection.insertOne(appointmentData);
+              const referenceNumber = result.insertedId.toString().slice(-6).toUpperCase();
+              
+              functionResult.message = `your appointment is booked with reference number ${referenceNumber}`;
+              console.log("Appointment saved to MongoDB with ID:", result.insertedId);
+            } catch (error) {
+              console.error("Error saving appointment to MongoDB:", error);
+              functionResult.message = "Sorry, there was an error booking your appointment. Please try again.";
+            }
           }
           console.log("details -> ", args);
         }
