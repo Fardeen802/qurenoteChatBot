@@ -35,11 +35,12 @@ class ChatService {
                 reasonForVisit,
                 time,
                 createdAt: new Date(),
-                status: 'booked'
+                status: 'open',
+                action:'appointment'
               };
               
               const result = await collection.insertOne(appointmentData);
-              const referenceNumber = result.insertedId.toString().slice(-6).toUpperCase();
+              const referenceNumber = result.insertedId.toString();
               
               functionResult.message = `your appointment is booked with reference number ${referenceNumber}`;
               console.log("Appointment saved to MongoDB with ID:", result.insertedId);
