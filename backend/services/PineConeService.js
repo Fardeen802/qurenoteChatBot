@@ -1,50 +1,70 @@
-const { Pinecone} = require('@pinecone-database/pinecone');
-const OpenAiUtils = require('../utils/OpenAiUtils');
 require('dotenv').config();
+const { Pinecone } = require('@pinecone-database/pinecone');
+const OpenAiUtils = require('../utils/OpenAiUtils');
+
 
 class PineconeService {
   constructor() {
-    this.client = new Pinecone({
-        apiKey : process.env.PINECONE_API_KEY,
-        controllerHostUrl : process.env.PINECONE_HOSTED_URL,
-    });
-    // this.client.init({
-    //   apiKey: process.env.PINECONE_API_KEY,
-    //   environment: process.env.PINECONE_ENVIRONMENT
-    // });
-    this.index = this.client.Index(process.env.PINECONE_INDEX_NAME);
+    if (!process.env.PINECONE_API_KEY) {
+      throw new Error('PINECONE_API_KEY is not set in environment variables.');
+    }
+    if (!process.env.PINECONE_INDEX_NAME) {
+      throw new Error('PINECONE_INDEX_NAME is not set in environment variables.');
+    }
+    this.apiKey = process.env.PINECONE_API_KEY;
+    this.indexName = process.env.PINECONE_INDEX_NAME;
+    this.client = new Pinecone({ apiKey: this.apiKey });
+    this.index = null;
     this.openai = OpenAiUtils.getOpenAiInstance();
+    this.initialized = false;
+    this.initPromise = this.init();
   }
 
-  // Query the index for top-3 relevant docs
+  async init() {
+    try {
+      this.index = this.client.Index(this.indexName);
+      this.initialized = true;
+    } catch (err) {
+      console.error('Error initializing Pinecone index:', err);
+      throw err;
+    }
+  }
+
+  async ensureInitialized() {
+    if (!this.initialized) await this.initPromise;
+  }
+
   async query(text) {
-    // 1. Embed the query text
-    const vector = await this.embed(text);
-
-    // 2. Query Pinecone for nearest neighbors
-    const { matches } = await this.index.query({
-      topK: 3,
-      includeMetadata: true,
-      vector
-    });
-
-    // 3. Return only the metadata of each match
-    console.log("matches in pine cone query -> ", matches);
-    return matches.map(m => m.metadata);
+    await this.ensureInitialized();
+    try {
+      const vector = await this.embed(text);
+      const { matches } = await this.index.query({
+        topK: 3,
+        includeMetadata: true,
+        vector
+      });
+      console.log('matches in pine cone query -> ', matches);
+      return matches.map(m => m.metadata);
+    } catch (err) {
+      console.error('Error querying Pinecone:', err);
+      return [];
+    }
   }
 
-  // Example wrapper for embeddings (replace with your embedder)
   async embed(text) {
-    const response = await this.openai.embeddings.create({
-      model: 'text-embedding-ada-002',
-      input: text
-    });
-
-    // The embedding is in data.data[0].embedding
-    console.log("response from embedding -> ", response);
-    const embedding = response.data[0].embedding;
-    console.log("after fetching embedding -> ", embedding);
-    return embedding;
+    try {
+      const response = await this.openai.embeddings.create({
+        model: 'text-embedding-3-small',
+        input: text
+      });
+      console.log('response from embedding -> ', response);
+      const embedding = response.data[0].embedding;
+      console.log('after fetching embedding -> ', embedding);
+      return embedding;
+    } catch (err) {
+      console.error('Error getting embedding from OpenAI:', err);
+      throw err;
+    }
   }
 }
 
