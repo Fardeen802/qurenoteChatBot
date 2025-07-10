@@ -1,0 +1,418 @@
+[
+  {
+    "id": "entry-0",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic location",
+      "intent": "patient wants to get to know about clinic address",
+      "information": "location 1 - UCOK \u0096 Gardner - 314 E Main St, Gardner, KS 66030, US\n"
+    }
+  },
+  {
+    "id": "entry-1",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic location",
+      "intent": "patient wants to get to know about clinic address",
+      "information": "location 2 - UCOK \u0096 Pleasant Hill - 220 N State Route-7 Pleasant Hill, MO 64080"
+    }
+  },
+  {
+    "id": "entry-2",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic location",
+      "intent": "patient  wants to get to know about clinic address",
+      "information": "location 3 - PCOK- primary careof kansas - 314 E Main St, Gardner, KS 66030, USA"
+    }
+  },
+  {
+    "id": "entry-3",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic location",
+      "intent": "patient wants to get to know about clinic address",
+      "information": "location 4 - UCOK \u0096 DeSoto - 33391 Lexington Ave, De Soto, KS 66018, United States"
+    }
+  },
+  {
+    "id": "entry-4",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic location",
+      "intent": "patient wants to get to know about clinic address",
+      "information": "location 5 - UCOK \u0096 Independence - 10010 E Truman Rd. Independence, MO 64053"
+    }
+  },
+  {
+    "id": "entry-5",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic Contact details",
+      "intent": "patient wants to get to know about contact details of the clinc",
+      "information": "location 1 - UCOK \u0096 Gardner  \nstaff@urgentcarekansas.com\n9139384726\n9139384790"
+    }
+  },
+  {
+    "id": "entry-6",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic Contact details",
+      "intent": "patient wants to get to know about contact details of the clinc",
+      "information": "location 2 - UCOK \u0096 Pleasant Hill\nphillstaff@urgentcareofkansas.com\n8168673095 \n8163634488"
+    }
+  },
+  {
+    "id": "entry-7",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic Contact details",
+      "intent": "patient wants to get to know about contact details of the clinc",
+      "information": "location 3 - PCOK- primary careof kansas\nstaff@primarycareofkansas.com\n9132597155"
+    }
+  },
+  {
+    "id": "entry-8",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic Contact details",
+      "intent": "patient wants to get to know about contact details of the clinc",
+      "information": "location 4 - UCOK \u0096 DeSoto \nstaff@primarycareofkansas.com\n9132597155 \n9135358664"
+    }
+  },
+  {
+    "id": "entry-9",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic Contact details",
+      "intent": "patient wants to get to know about contact details of the clinc",
+      "information": "location 5 - UCOK \u0096 Independence\n8166316786"
+    }
+  },
+  {
+    "id": "entry-10",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to get to know about clinic timings",
+      "information": "location 1 - UCOK \u0096 Gardner \n9:00am -- 7:00pm (Mon - Fri)\n10:00am -- 5:00pm (Sat-Sun )"
+    }
+  },
+  {
+    "id": "entry-11",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to get to know about clinic timings",
+      "information": "location 2 - UCOK \u0096 Pleasant Hill\n9:00am -- 6:00pm (Mon - Fri)\n10:00am -- 4:00pm (Sat-Sun )"
+    }
+  },
+  {
+    "id": "entry-12",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to get to know about clinic timings",
+      "information": "location 4 - UCOK \u0096 DeSoto \n9:00am -- 5:00pm (Mon - Fri)"
+    }
+  },
+  {
+    "id": "entry-13",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to get to know about clinic timings",
+      "information": "location 5 - UCOK \u0096 Independence \n9:00am -- 6:00pm (Mon - Fri)\n10:00am -- 4:00pm (Sat-Sun )"
+    }
+  },
+  {
+    "id": "entry-14",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about clinic services",
+      "information": "Urgent Care Services, Primary Care, Diagnostic Services, Specialized Testing, Children\u0092s Services, Preventive Health"
+    }
+  },
+  {
+    "id": "entry-15",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about urgent care services at the clinic",
+      "information": "Urgent Care Services - Treatment for ER diagnoses, Walk-ins and appointments accepted, Telemedicine visits available\u00a0"
+    }
+  },
+  {
+    "id": "entry-16",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about primary care services at the clinic",
+      "information": "Wellness checks, Annual physicals, Chronic disease management, On-site X-ray, On-site EKG\u00a0"
+    }
+  },
+  {
+    "id": "entry-17",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Diagnostic services at the clinic",
+      "information": "Digital X-ray (mentioned twice), On-site lab testing, Flu tests, Urine tests, TB shots\u00a0"
+    }
+  },
+  {
+    "id": "entry-18",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Specialized Testing at the clinic",
+      "information": "STD testing and treatment\u00a0"
+    }
+  },
+  {
+    "id": "entry-19",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Children\u0092s Services at the clinic",
+      "information": "Children\u0092s urgent care, School, camp, and sports physicals\u00a0"
+    }
+  },
+  {
+    "id": "entry-20",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Preventive Health Services at the clinic",
+      "information": "Routine checkups, Seasonal allergy treatments\u00a0"
+    }
+  },
+  {
+    "id": "entry-21",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know aboutkinds of physicals are available at the clinic",
+      "information": "General Physicals, Pre-employment Physicals"
+    }
+  },
+  {
+    "id": "entry-22",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about screening done in the clinc",
+      "information": "Drug Screenings, Vision Testing, TB Testing (One-step, Two-step) Labs"
+    }
+  },
+  {
+    "id": "entry-23",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know what is included in the physicals",
+      "information": "Drug Screenings, Vision Testing, TB Testing (One-step, Two-step), Vital signs (blood pressure, heart rate, temperature), Heart and lung health, Abdominal health, Skin for signs of underlying illness"
+    }
+  },
+  {
+    "id": "entry-24",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about what condition is treated at UCOK Mental Health Center",
+      "information": "Depression, Anxiety, PTSD, ADHD, Addiction, Eating Disorders, Sleep/Insomnia, Anger, Bipolar Disorder, Chronic Pain, Relationship Issues, Parenting, Grief, Self-Harm, Substance Abuse, Emotional Disturbance, School Issues, Internet/Gaming/Gambling Addiction, and more."
+    }
+  },
+  {
+    "id": "entry-25",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Therapies and Services Offered at the clinic",
+      "information": "marriage counseling, family therapy, and help with divorce and relationship issues,  ADHD, behavioral issues, school issues, learning disabilities"
+    }
+  },
+  {
+    "id": "entry-26",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about types of wounds treated at the clinic",
+      "information": "Cuts and lacerations, Abrasions, Burns, Surgical wounds, Pressure ulcers, Skin infections"
+    }
+  },
+  {
+    "id": "entry-27",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about appointment for wound care",
+      "information": "You need schedule an appointment but it is not necessary. We welcome walk-ins during business hours for same-day wound care."
+    }
+  },
+  {
+    "id": "entry-28",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to know about Insurance.",
+      "information": "Urgent Care of Kansas accepts most insurances including Medicare and Medicaid. Feel free to ask us about acceptance of your insurance. We offer competitive rates and accept cash and major credit cards."
+    }
+  },
+  {
+    "id": "entry-29",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "patient wants to know about Self-Pay ",
+      "information": "We offer straightforward self-pay pricing so patients can receive quality care without surprise costs. There are lots of things you worry about when it comes to your health care, but the price shouldn\u0092t be one of them. "
+    }
+  },
+  {
+    "id": "entry-30",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic services",
+      "intent": "patient wants to know about Lab Tests services",
+      "information": "CBC (Complete Blood Count)\nA1C (for diabetes)\nCMP (Comprehensive Metabolic Panel)\nLipid Panel (Cholesterol, HDL ratio)\nHepatitis B \nHerpes\nHIV\nPregnancy Test\nSTD Testing\nThroat/Strep Culture\nTSH\nTestosterone\nUrine Culture\nInfluenza (seasonal flu test)"
+    }
+  },
+  {
+    "id": "entry-31",
+    "values": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "metadata": {
+      "category": "Clinic general info",
+      "intent": "Patient wants to book an appointment",
+      "information": "(Appointment booking procedure)*"
+    }
+  }
+]

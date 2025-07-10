@@ -8,9 +8,29 @@ const ChatService = require('./services/ChatService');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT =  5050;
 
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/api/hello', (req, res) => {
@@ -48,16 +68,16 @@ app.post('/api/chat', async (req, res) => {
     const pineServiceObj = PineConeService;
     // retrieve context form pinecone
     let inputMessages = getMessages(sessionId);
-    // const kb = await pineServiceObj.query(message);
-    // if(kb?.length && kb.length>0){
-    //   inputMessages = [
-    //     ...inputMessages,
-    //     { role: 'system', content: kb.map(d => d.text).join('\n\n') },
-    //     { role : 'user', content : message},
-    //   ]
-    // }else{
-    //   inputMessages.push({ role : 'user', content : message });
-    // }
+    const kb = await pineServiceObj.query(message);
+    if(kb?.length && kb.length>0){
+      inputMessages = [
+        ...inputMessages,
+        { role: 'system', content: kb.map(d => d.text).join('\n\n') },
+        { role : 'user', content : message},
+      ]
+    }else{
+      inputMessages.push({ role : 'user', content : message });
+    }
     inputMessages.push({ role : 'user', content : message });
     appendMessages(sessionId, { role : 'user', content : message });
     const chatServiceObj = new ChatService();
