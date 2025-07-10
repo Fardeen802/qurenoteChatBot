@@ -3,7 +3,7 @@ const cors = require('cors');
 const { connectToMongo } = require('./mongo');
 const { OpenAI } = require('openai');
 const PineConeService = require('./services/PineConeService');
-const { getMessages, appendMessages } = require('./utils/InMemoryStore');
+const { getMessages, appendMessages, appendKnowledgeBaseMessage } = require('./utils/InMemoryStore');
 const ChatService = require('./services/ChatService');
 require('dotenv').config();
 
@@ -70,13 +70,9 @@ app.post('/api/chat', async (req, res) => {
     let inputMessages = getMessages(sessionId);
     const kb = await pineServiceObj.query(message);
     if(kb?.length && kb.length>0){
-      inputMessages = [
-        ...inputMessages,
-        { role: 'system', content: kb.map(d => d.text).join('\n\n') },
-        { role : 'user', content : message},
-      ]
-    }else{
-      inputMessages.push({ role : 'user', content : message });
+      const kbText = kb.map(d => d.text).join('\n\n');
+      appendKnowledgeBaseMessage(sessionId, kbText);
+      inputMessages = getMessages(sessionId); // refresh after appending KB
     }
     inputMessages.push({ role : 'user', content : message });
     appendMessages(sessionId, { role : 'user', content : message });
