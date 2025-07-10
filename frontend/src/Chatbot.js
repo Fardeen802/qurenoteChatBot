@@ -99,7 +99,7 @@ const Chatbot = () => {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <h2 style={styles.title}>Chat Assistant</h2>
+        <h2 style={styles.title}><img src={"https://primarycareofkansas.com/wp-content/uploads/2023/03/primary-care-logo-1.png"} alt="" height={"60px"}/></h2>
         <div style={styles.status}>
           <div style={styles.statusDot}></div>
           Online
