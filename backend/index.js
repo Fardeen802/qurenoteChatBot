@@ -1,9 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { connectToMongo } = require('./mongo');
-const { OpenAI } = require('openai');
 const PineConeService = require('./services/PineConeService');
-const { getMessages, appendMessages, appendKnowledgeBaseMessage } = require('./utils/InMemoryStore');
+const { getMessages, appendMessages, appendKnowledgeBaseMessage, getSystemPrompt } = require('./utils/InMemoryStore');
 const ChatService = require('./services/ChatService');
 require('dotenv').config();
 
@@ -67,13 +65,18 @@ app.post('/api/chat', async (req, res) => {
     const {message, sessionId} = req?.body;
     const pineServiceObj = PineConeService;
     // retrieve context form pinecone
-    let inputMessages = getMessages(sessionId);
+    let inputMessages = [{ role : 'system', content : getSystemPrompt()}];
     const kb = await pineServiceObj.query(message);
+    console.log("this is matched query kb -> ", kb);
     if(kb?.length && kb.length>0){
-      const kbText = kb.map(d => d.text).join('\n\n');
-      appendKnowledgeBaseMessage(sessionId, kbText);
-      inputMessages = getMessages(sessionId); // refresh after appending KB
+      const kbText = kb.map(d => d.information).join('\n\n');
+      inputMessages.push({
+        role : 'system',
+        content : `Context from knowledge base:\n${kbText}`,
+      })
     }
+    const sessionHistory = getMessages(sessionId) ?? [];
+    inputMessages.push(...sessionHistory);
     inputMessages.push({ role : 'user', content : message });
     appendMessages(sessionId, { role : 'user', content : message });
     const chatServiceObj = new ChatService();

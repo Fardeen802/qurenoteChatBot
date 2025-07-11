@@ -1,15 +1,18 @@
 const messageStore = new Map();
 
 function getMessages (sessionId){
-    if(!messageStore.has(sessionId)){
-        const systemPrompt = getSystemPrompt();
-        messageStore.set(sessionId, [{role : 'system', content : systemPrompt}]);
+    if(messageStore.has(sessionId)){
+        return messageStore.get(sessionId);
     }
-    return messageStore.get(sessionId);
+    return null;
 }
 
 function appendMessages (sessionId, messageObj){
-    messageStore.get(sessionId).push(messageObj);
+    if(messageStore.has(sessionId)){
+        messageStore.get(sessionId).push(messageObj);
+    }else{
+        messageStore.set(sessionId, [messageObj]);
+    }
 }
 
 function appendKnowledgeBaseMessage(sessionId, kbText) {
@@ -66,4 +69,4 @@ Always maintain a polite, professional, and helpful tone.
 }
 
 
-module.exports = {getMessages, appendMessages, appendKnowledgeBaseMessage}
+module.exports = {getMessages, appendMessages, appendKnowledgeBaseMessage, getSystemPrompt}
