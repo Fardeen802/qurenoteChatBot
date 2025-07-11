@@ -66,20 +66,18 @@ app.post('/api/chat', async (req, res) => {
   try {
     const {message, sessionId} = req?.body;
     const pineServiceObj = PineConeService;
-    // retrieve context form pinecone
     let inputMessages = getMessages(sessionId);
     const kb = await pineServiceObj.query(message);
+
     if(kb?.length && kb.length>0){
-      const kbText = kb.map(d => d.text).join('\n\n');
+      const kbText = kb.map(d => `🗂 ${d.category || ''}\n💡 ${d.intent || ''}\n📚 ${d.information || ''}`).join('\n\n');
       appendKnowledgeBaseMessage(sessionId, kbText);
-      inputMessages = getMessages(sessionId); // refresh after appending KB
+      inputMessages = getMessages(sessionId);
     }
     inputMessages.push({ role : 'user', content : message });
     appendMessages(sessionId, { role : 'user', content : message });
     const chatServiceObj = new ChatService();
     const aiResponse = await chatServiceObj.requestOpenAI(inputMessages, sessionId);
-    // const { collection } = await connectToMongo();
-    // await collection.insertOne({ sessionId, ...sessionData });
     return res.json({ message : aiResponse });
   } catch (err) {
     console.error("error is -> ", err);

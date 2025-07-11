@@ -64,13 +64,13 @@ class ChatService {
           tools: this.#getFunctionCalls(),
           store: true,
         });
-        console.log("second response -> ", secondResponse);
+
         if(secondResponse?.output_text){
             appendMessages(sessionId, {role : 'assistant', content : secondResponse.output_text});
         }
         return secondResponse.output_text;
       } else if (firstResponse?.output_text) {
-        console.log("response from output text -> ", firstResponse);
+        
         if(firstResponse?.output_text){
             appendMessages(sessionId, {role : 'assistant', content : firstResponse.output_text});
         }
