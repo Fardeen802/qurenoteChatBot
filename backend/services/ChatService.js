@@ -45,7 +45,7 @@ class ChatService {
                 phone,
                 email,
                 providerName,
-                reasonForVisit,
+                reason : reasonForVisit,
                 createdAt: new Date(),
                 status: "open",
                 action: "appointment",
@@ -71,21 +71,27 @@ class ChatService {
         console.log("details -> ", args);
       }else if (name === "create_refill") {
         const { patientName, dob, medicationName } = args;
-        const isValid = await this.#verifyMedication(medicationName);
-        if (!isValid) {
-          functionResult.message = `I couldn't find “${medicationName}” in our drug database. Please check the spelling.`;
-        } else {
-          const { collection } = await connectToMongo();
-          const doc = {
-            patientName,
-            dob,
-            medicationName,
-            createdAt: new Date(),
-            status: "open",
-            action: "refill",
-          };
-          const result = await collection.insertOne(doc);
-          functionResult.message = `Your refill has been created with reference number ${result.insertedId}`;
+        try {
+          const isValid = await this.#verifyMedication(medicationName);
+          if (!isValid) {
+            functionResult.message = `I couldn't find “${medicationName}” in our drug database. Please check the spelling.`;
+          } else {
+            const { collection } = await connectToMongo();
+            const doc = {
+              patientName,
+              dob,
+              medicationName,
+              createdAt: new Date(),
+              status: "open",
+              action: "refill",
+            };
+            const result = await collection.insertOne(doc);
+            functionResult.message = `Your refill has been created with reference number ${result.insertedId}`;
+          }
+        } catch (error) {
+          console.log("unable to verify -> ", error);
+          functionResult.error =
+            "Currently unable to validate medication name, try after sometime.";
         }
       }
       console.log("what comes in function result -> ", functionResult);
