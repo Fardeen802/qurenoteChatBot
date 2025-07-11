@@ -69,6 +69,24 @@ class ChatService {
           }
         }
         console.log("details -> ", args);
+      }else if (name === "create_refill") {
+        const { patientName, dob, medicationName } = args;
+        const isValid = await this.#verifyMedication(medicationName);
+        if (!isValid) {
+          functionResult.message = `I couldn't find “${medicationName}” in our drug database. Please check the spelling.`;
+        } else {
+          const { collection } = await connectToMongo();
+          const doc = {
+            patientName,
+            dob,
+            medicationName,
+            createdAt: new Date(),
+            status: "open",
+            action: "refill",
+          };
+          const result = await collection.insertOne(doc);
+          functionResult.message = `Your refill has been created with reference number ${result.insertedId}`;
+        }
       }
       console.log("what comes in function result -> ", functionResult);
       inputMessages.push(choice);
@@ -156,11 +174,34 @@ class ChatService {
           ],
         },
       },
+      {
+        type: "function",
+        name: "create_refill",
+        description: "Create a medication refill for a patient",
+        parameters: {
+          type: "object",
+          properties: {
+            patientName: { type: "string", description: "Patient's full name" },
+            dob: { type: "string", description: "Date of birth" },
+            medicationName: {
+              type: "string",
+              description: "Name of the medication to refill",
+            },
+          },
+          required: ["patientName", "dob", "medicationName"],
+        },
+      },
     ];
     return Functions;
   }
 
-  
+  async #verifyMedication(name) {
+    const url = `https://rxnav.nlm.nih.gov/REST/drugs.json?name=${name}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log("data result after medication -> ", data);
+    return !!data.drugGroup?.conceptGroup?.length;
+  }
 
   //   #getSystemPrompt() {
   //     const prompt = `
