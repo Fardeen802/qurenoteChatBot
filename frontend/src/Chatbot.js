@@ -25,7 +25,7 @@ const Chatbot = () => {
       "Let me give you a detailed response to that question."
     ];
 
-    let response = await fetch("https://qurenotechatbot.onrender.com/api/chat",{
+    let response = await fetch("https://aichatbot.qurenote.com/api/chat",{
         method:"POST",
         body:JSON.stringify({
             sessionId,

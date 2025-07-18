@@ -2,11 +2,15 @@
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-const mongoUri = process.env.MONGODB_URI;
+
+const env=process.env.ENV;
+let mongoUri = process.env[`${env}_MONGODB_URI`];
 
 let cachedDb = null;
 let cachedCollection = null;
 let mongoClient = null;
+
+console.log(mongoUri);
 
 async function connectToMongo() {
   if (cachedDb && cachedCollection) {

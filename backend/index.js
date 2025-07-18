@@ -4,6 +4,7 @@ const PineConeService = require('./services/PineConeService');
 const { getMessages, appendMessages, appendKnowledgeBaseMessage, getSystemPrompt } = require('./utils/InMemoryStore');
 const ChatService = require('./services/ChatService');
 require('dotenv').config();
+const twilioRouter=require("./twilio/api.js")
 
 const app = express();
 const PORT =  5050;
@@ -14,19 +15,23 @@ const allowedOrigins = [
   'https://medical-chat-bot.netlify.app'
 ];
 
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+//   methods: ['GET', 'POST', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// };
 const corsOptions = {
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, 
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
@@ -90,6 +95,12 @@ app.post('/api/chat', async (req, res) => {
     return res.status(500).json({ error: 'Failed to get response from OpenAI' });
   }
 });
+
+
+
+
+
+app.use("/api/twilio",twilioRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
